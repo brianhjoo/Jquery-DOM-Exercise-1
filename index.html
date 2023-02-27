@@ -79,17 +79,29 @@
       return Math.floor(Math.random() * 101);
     }
 
-    /** */
+    /** When one of the color inputs is changed, updates the page's
+     *  background color.
+     */
     function changeColor() {
-      const colorValue = $();
+      const colorHTMLElements = $('.form-control').get()
+      const colorValues = colorHTMLElements.map( x => Number(x.value));
+      const [r, g, b] = colorValues;
+      $('body').css('background-color', `rgb(${r},${g},${b})`);
     }
-
+    
+    /** Removes an image from the DOM
+     * 
+     */
+    function removeImage(evt) {
+      $(this).remove();
+    }
     $('article > img').addClass('image-center');
     $('article p').last().remove();
     $('#title').css('font-size', getRandomNum());
     $('ol').append($('<li>Squirrel!!</li>'));
     $('aside').html($('<p>I apologize for wasting your time!</p>'));
-    $('.row mb-5').on('change', '.form-control', changeColor);
+    $('.form-control').on('change', changeColor);
+    $('.col-sm-8').on("click", 'img', removeImage);
 
   </script>
 </body>
