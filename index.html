@@ -82,7 +82,6 @@
     /** When one of the color inputs is changed, updates the page's
      *  background color.
      */
-
     function changeColor() {
       const $colorValueInputs = $('.form-control');
       const colorValues = [];
@@ -91,12 +90,13 @@
         colorValues.push($colorValueInputs.eq(i).val());
       }
 
+      // Map function???
+
       const [r, b, g] = colorValues;
       $('body').css('background-color', `rgb(${r},${g},${b})`);
     }
 
     /** Removes an image from the DOM
-     *
      */
     function removeImage(evt) {
       $(this).remove();
