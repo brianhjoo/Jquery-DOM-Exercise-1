@@ -82,13 +82,14 @@
     /** When one of the color inputs is changed, updates the page's
      *  background color.
      */
+    // TODO: jQuery eq() method
     function changeColor() {
       const colorHTMLElements = $('.form-control').get()
       const colorValues = colorHTMLElements.map( x => Number(x.value));
       const [r, g, b] = colorValues;
       $('body').css('background-color', `rgb(${r},${g},${b})`);
     }
-    
+
     /** Removes an image from the DOM
      * 
      */
@@ -99,9 +100,10 @@
     $('article p').last().remove();
     $('#title').css('font-size', getRandomNum());
     $('ol').append($('<li>Squirrel!!</li>'));
+    // TODO: look at jQuery empty method
     $('aside').html($('<p>I apologize for wasting your time!</p>'));
     $('.form-control').on('change', changeColor);
-    $('.col-sm-8').on("click", 'img', removeImage);
+    $('body').on("click", 'img', removeImage);
 
   </script>
 </body>
