@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    .movie-reviews{
+        text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+    <h1>Rate Some Movies!</h1>
+    <form class="ratings-form">
+        <input type="text" class="movie-title" value="Pulp Fiction">
+        <input type="number" class="movie-rating" min="0" max="10" value="8">
+        <button class="submit-rating" type="submit">Submit</button>
+    </form>
+    <table class="movie-reviews">
+        <thead>
+            <th>Title</th>
+            <th>Rating</th>
+            <th></th>
+        </thead>
+    </table>
+
+
+<script src="https://unpkg.com/jquery"></script>
+<script>
+
+    /** Makes a table row with a title rating and delete button.
+     * Appends it to the main table.
+     */
+    function makeTableRow(evt) {
+        evt.preventDefault();
+
+        const movieTitle = $('.movie-title').val();
+        const movieRating = $('.movie-rating').val();
+
+        const $tableRow = $('<tr>');
+        const $movieTitle = $('<td>').text(movieTitle);
+        const $movieRating = $('<td>').text(movieRating);
+        const $deleteButton = $('<button class ="delete">Delete</button>')
+
+        $tableRow.append($movieTitle);
+        $tableRow.append($movieRating);
+        $tableRow.append($deleteButton);
+
+        $('.movie-reviews').append($tableRow);
+    }
+
+    /** deletes a review from the table */
+    function deleteTableRow(evt) {
+        $(this).parent().remove();
+    }
+
+
+$('.ratings-form').on('submit', makeTableRow);
+$(".movie-reviews").on('click' , ".delete", deleteTableRow)
+</script>
+</body>
+</html>
