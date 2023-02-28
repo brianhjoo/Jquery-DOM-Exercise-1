@@ -2,13 +2,13 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <title>Document</title>
-  <style>
-    .movie-reviews{
-        text-align: center;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .movie-reviews {
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body>
@@ -27,38 +27,44 @@
     </table>
 
 
-<script src="https://unpkg.com/jquery"></script>
-<script>
+    <script src="https://unpkg.com/jquery"></script>
+    <script>
+        "use strict";
+        //TODO: move to separate file.
+        /** Makes a table row with a title rating and delete button.
+         * Appends it to the main table.
+         */
+        //TODO: change function name to be more descriptive
+        //TODO: decompose
+        function makeTableRow(evt) {
+            evt.preventDefault();
 
-    /** Makes a table row with a title rating and delete button.
-     * Appends it to the main table.
-     */
-    function makeTableRow(evt) {
-        evt.preventDefault();
+            const movieTitle = $('.movie-title').val();
+            const movieRating = $('.movie-rating').val();
 
-        const movieTitle = $('.movie-title').val();
-        const movieRating = $('.movie-rating').val();
+            const $tableRow = $('<tr>');
+            const $movieTitle = $('<td>').text(movieTitle);
+            const $movieRating = $('<td>').text(movieRating);
+            const $deleteButton = $('<button class ="delete">Delete</button>')
 
-        const $tableRow = $('<tr>');
-        const $movieTitle = $('<td>').text(movieTitle);
-        const $movieRating = $('<td>').text(movieRating);
-        const $deleteButton = $('<button class ="delete">Delete</button>')
+            $tableRow.append($movieTitle);
+            $tableRow.append($movieRating);
+            $tableRow.append($deleteButton);
 
-        $tableRow.append($movieTitle);
-        $tableRow.append($movieRating);
-        $tableRow.append($deleteButton);
+            $('.movie-reviews').append($tableRow);
+        }
 
-        $('.movie-reviews').append($tableRow);
-    }
-
-    /** deletes a review from the table */
-    function deleteTableRow(evt) {
-        $(this).parent().remove();
-    }
+        /** deletes a review from the table */
+        function deleteTableRow(evt) {
+            //TODO: jQuery closest
+            //TODO: evt.target instead of this might be clearer
+            $(this).parent().remove();
+        }
 
 
-$('.ratings-form').on('submit', makeTableRow);
-$(".movie-reviews").on('click' , ".delete", deleteTableRow)
-</script>
+        $('.ratings-form').on('submit', makeTableRow);
+        $(".movie-reviews").on('click', ".delete", deleteTableRow)
+    </script>
 </body>
+
 </html>
